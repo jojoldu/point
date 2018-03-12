@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2'
+	}
+}
+
+allprojects {
+	apply plugin: 'com.github.kt3k.coveralls'
+	apply plugin: 'jacoco'
+
+	repositories {
+		jcenter()
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	group = 'com.jojoldu'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
+	jacocoTestReport {
+		reports {
+			html.enabled = true // human readable
+			xml.enabled = true // required by coveralls
+		}
+	}
+}
+
+task jacocoRootReport(type: JacocoReport) {
+	description = 'Generates an aggregate report from all subprojects'
+	dependsOn = subprojects.test
+	sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+	classDirectories =  files(subprojects.sourceSets.main.output)
+	executionData = files(subprojects.jacocoTestReport.executionData)
+	reports {
+		html.enabled = true // human readable
+		xml.enabled = true // required by coveralls
+	}
+}
+
+coveralls {
+	sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
+	jacocoReportPath = "${buildDir}/reports/jacoco/jacocoRootReport/jacocoRootReport.xml"
+}
