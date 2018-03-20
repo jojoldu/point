@@ -18,12 +18,12 @@ buildscript {
 }
 
 ext {
-	projectGroup = 'com.jojoldu.point'
+	projectGroup = 'com.github.jojoldu.point'
 	projectVersion = '0.0.1-'+new Date().format("yyyyMMddHHmmss")
 }
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '4.3.1'
+	gradleVersion = '4.5.1'
 }
 
 allprojects {
@@ -39,29 +39,19 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'groovy'
 	apply plugin: 'eclipse'
+	apply plugin: 'idea'
 	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
 	apply plugin: "com.ewerk.gradle.plugins.querydsl"
 
-	group = "${projectGroup}"
-	version = "${projectVersion}"
 	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
 
 	repositories {
 		mavenCentral()
 		jcenter()
-		maven {
-			url 'https://repo.spring.io/libs-milestone'
-		}
-	}
-
-	springBoot {
-		buildInfo {
-			additionalProperties = [
-					'group'         : "${projectGroup}",
-					'version'       : "${projectVersion}",
-					'build-datetime': new Date().format("yyyyMMddHHmmss")
-			]
-		}
+		maven { url 'https://repo.spring.io/libs-milestone' }
+		maven { url 'https://jitpack.io' }
 	}
 
 	def querydslSrcDir = 'src/main/generated'
@@ -82,10 +72,12 @@ subprojects {
 
 	dependencies {
 		compile('org.springframework.boot:spring-boot-starter')
-		compile("org.springframework.boot:spring-boot-starter-actuator")
+//		compile("org.springframework.boot:spring-boot-starter-actuator")
 		compile('org.apache.commons:commons-lang3:3.7')
 		compile 'com.google.code.findbugs:jsr305:3.0.2'
-		compile('org.projectlombok:lombok')
+		compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
+
+//		compile 'com.github.jojoldu.spring-boot-aws-mock:spring-boot-starter-mock-sqs:0.0.8'
 		testCompile('org.springframework.boot:spring-boot-starter-test')
 		testCompile('org.spockframework:spock-core:1.1-groovy-2.4')
 		testCompile('org.spockframework:spock-spring:1.1-groovy-2.4')

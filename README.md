@@ -61,6 +61,7 @@
   * 유효기간 만료시 remain_point를 0으로 update
   * 조회의 경우 **remain_point가 0이 아닌 경우만** 조회
   * 컬럼
+      * customer_id
       * save_type (제품구매, 제품리뷰, 이벤트참여, 보상, 충전)
       * save_point
       * remain_point 
@@ -72,6 +73,7 @@
   * 포인트의 모든 이벤트
   * 포인트 적립/사용/소멸: insert
   * 컬럼
+      * customer_id
       * event_type (적립/사용/소멸)
       * point
       * description
@@ -85,10 +87,10 @@
 (Batch를 통한 소멸/관리자페이지에서 수동 적립 등등 모두 publisher를 통해서 진행)
 
 * point-core
-* point-publisher
-  * SQS Publish
-* point-subscriber
-  * SQS Subscribe
+* point-provider
+  * SQS provide
+* point-consumer
+  * SQS consume
   * RDS와 DynamoDB에 저장
 * point-batch
   * 포인트 소멸 관련 처리
