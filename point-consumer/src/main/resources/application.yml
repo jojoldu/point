@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: local
+  jpa:
+    open-in-view: false
+server:
+  port: 9400
+
+
+---
+spring:
+  profiles: local
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+sqs:
+  mock:
+    enabled: true

@@ -72,7 +72,6 @@ subprojects {
 
 	dependencies {
 		compile('org.springframework.boot:spring-boot-starter')
-//		compile("org.springframework.boot:spring-boot-starter-actuator")
 		compile('org.apache.commons:commons-lang3:3.7')
 		compile 'com.google.code.findbugs:jsr305:3.0.2'
 		compile group: 'org.projectlombok', name: 'lombok', version: '1.16.20'
