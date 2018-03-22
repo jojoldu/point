@@ -1,4 +1,4 @@
-package com.github.jojoldu.point.core.domain.exception;
+package com.github.jojoldu.point.core.exception;
 
 /**
  * Created by jojoldu@gmail.com on 2018. 3. 21.

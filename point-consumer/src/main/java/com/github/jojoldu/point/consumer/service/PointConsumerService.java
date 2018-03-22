@@ -1,8 +1,12 @@
 package com.github.jojoldu.point.consumer.service;
 
+import com.github.jojoldu.point.core.domain.active.PointActiveRepository;
+import com.github.jojoldu.point.core.domain.history.PointHistoryRepository;
+import com.github.jojoldu.point.core.message.PointMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by jojoldu@gmail.com on 2018. 3. 21.
@@ -14,6 +18,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Service
 public class PointConsumerService {
+
+    private PointActiveRepository pointActiveRepository;
+    private PointHistoryRepository pointHistoryRepository;
+
 
     /**
      * 적립
@@ -35,6 +43,10 @@ public class PointConsumerService {
      * 2-1. 없을 경우 => pass
      */
 
+    @Transactional
+    public void savePoint(PointMessage message){
+
+    }
     /**
      * 사용
      */

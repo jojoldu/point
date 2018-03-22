@@ -1,9 +1,9 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-/out
+out
 generated
-
+build
 ### STS ###
 .apt_generated
 .classpath

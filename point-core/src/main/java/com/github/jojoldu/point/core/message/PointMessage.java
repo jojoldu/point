@@ -1,5 +1,7 @@
 package com.github.jojoldu.point.core.message;
 
+import com.github.jojoldu.point.core.domain.active.PointActive;
+import com.github.jojoldu.point.core.domain.history.PointHistory;
 import com.github.jojoldu.point.core.domain.type.EventDetailType;
 import com.github.jojoldu.point.core.domain.type.EventType;
 import com.github.jojoldu.point.core.exception.GoToDeadLetterQueueException;
@@ -57,5 +59,26 @@ public class PointMessage {
             log.error("PointMessage Create Exception", e);
             throw new GoToDeadLetterQueueException();
         }
+    }
+
+    public PointHistory toHistory(){
+        return PointHistory.builder()
+                .messageId(messageId)
+                .tradeNo(tradeNo)
+                .eventType(eventType)
+                .eventDetailType(eventDetailType)
+                .savePoint(savePoint)
+                .description(description)
+                .customerId(customerId)
+                .build();
+    }
+
+    public PointActive toActive(){
+        return PointActive.builder()
+                .customerId(customerId)
+                .savePoint(savePoint)
+                .eventDetailType(eventDetailType)
+                .description(description)
+                .build();
     }
 }

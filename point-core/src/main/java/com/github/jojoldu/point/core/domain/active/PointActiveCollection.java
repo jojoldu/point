@@ -1,6 +1,6 @@
 package com.github.jojoldu.point.core.domain.active;
 
-import com.github.jojoldu.point.core.domain.exception.PointOverflowException;
+import com.github.jojoldu.point.core.exception.PointOverflowException;
 import lombok.Getter;
 
 import java.util.List;

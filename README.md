@@ -5,6 +5,13 @@
 ## Queue 시스템 소개
 
 
+### Skill Stack
+
+* AWS SQS
+* AWS RDS
+* AWS DynamoDB
+  * 데이터 내구성을 위해 Elastic Cache보다는 DynamoDB 선택
+  * [DynamoDB vs Elastic Cache](https://www.quora.com/How-does-one-choose-DynamoDB-versus-Redis-ElastiCache-on-AWS)
 
 ## 프로젝트 상세
 
@@ -55,7 +62,7 @@
   * 이력조회시 10개 혹은 20개 단위 페이징 구현이 복잡해짐
   * 최대한 심플한 구조로 가야 유지보수가 하기 쉬움
   
-그래서 아래와 같이 2개 도메인으로 설계
+그래서 아래와 같이 3개 도메인으로 설계
 
 * point_active
   * 활성화된 포인트
@@ -90,6 +97,14 @@
   * RDS, DynamoDB 양쪽에서 모두 관리
   * uuid+customer_id가 유니크키
 
+* point_sum
+  * 고객의 현재 총 포인트만 갖고 있음
+  * point_active에 insert/update가 발생시마다 remain_point 의 총합계로 overwrite
+  * 컬럼
+      * customer_id
+      * point_sum
+  * DynamoDB에서만 관리     
+
 ### 모듈
 
 포인트 관련 모든 이벤트는 **publisher를 통해서 처리**하는 것을 전제로 한다.  
@@ -106,8 +121,19 @@
       * 유효기간 만료된 포인트 소멸처리
   * 기존 데이터 마이그레이션
 * point-external-api
-  * 외부 제공용
+  * 외부용
   * DynamoDB의 내용을 조회
 * point-internal-api
+  * 내부용
+  * 
 * point-admin
 * point-test-web
+
+## 남은 문제
+
+* 포인트 계산 로직의 주체는 누구?
+  * 포인트 어드민 생기는것 보니 우리가 해야하나보다
+  * 그럼 주문 금액과 포인트 키를 받아서 직접 포인트 계산해야하나?
+  * 아니면 거기서 계산된 포인트를 주나?
+  * 부분 결제 취소가 있으면 부분 포인트 취소도 있어야하는데? 
+      * 얼만큼 적립 취소를 시켜야하는지 포인트 시스템에서 어떻게 알지?
