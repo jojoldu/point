@@ -1,4 +1,4 @@
-package com.github.jojoldu.point.core.domain.save;
+package com.github.jojoldu.point.core.domain.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum SaveType {
-    BUY("제품 구매"),
-    REVIEW("제품 리뷰"),
-    EVENT("이벤트 참여"),
-    REWARD("보상"),
-    CHARGING("충전");
+public enum EventType {
+    SAVE("적립"),
+    USE("사용"),
+    DISAPPEAR("소멸");
 
     private String title;
 }

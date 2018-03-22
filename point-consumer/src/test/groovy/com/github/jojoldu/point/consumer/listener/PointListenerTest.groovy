@@ -1,13 +1,12 @@
 package com.github.jojoldu.point.consumer.listener
 
 import com.amazonaws.services.sqs.AmazonSQSAsync
-import com.github.jojoldu.point.core.domain.event.EventType
+import com.github.jojoldu.point.core.domain.type.EventType
 import com.github.jojoldu.point.core.message.PointMessage
 import com.github.jojoldu.sqs.config.SqsQueues
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate
-import org.springframework.context.annotation.Bean
 import spock.lang.Specification
 
 /**
@@ -36,7 +35,7 @@ class PointListenerTest extends Specification {
         PointMessage message = PointMessage.builder()
                 .customerId(1L)
                 .savePoint(100L)
-                .eventType(EventType.EARN)
+                .eventType(EventType.SAVE)
                 .build()
         when:
         queueMessagingTemplate.convertAndSend(sqsQueues.getQueueName("point"), message)

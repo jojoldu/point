@@ -1,4 +1,4 @@
-package com.github.jojoldu.point.core.domain.save;
+package com.github.jojoldu.point.core.domain.active;
 
 import com.github.jojoldu.point.core.domain.exception.PointOverflowException;
 import lombok.Getter;
@@ -12,21 +12,21 @@ import java.util.List;
  */
 
 @Getter
-public class PointSaveCollection {
-    private List<PointSave> pointSaves;
+public class PointActiveCollection {
+    private List<PointActive> pointActives;
     private Long totalRemainPoint;
 
-    public PointSaveCollection(List<PointSave> pointSaves) {
-        this.pointSaves = pointSaves;
-        this.totalRemainPoint = pointSaves.stream()
-                .mapToLong(PointSave::getRemainPoint)
+    public PointActiveCollection(List<PointActive> pointActives) {
+        this.pointActives = pointActives;
+        this.totalRemainPoint = pointActives.stream()
+                .mapToLong(PointActive::getRemainPoint)
                 .sum();
     }
 
     public void deductPoint(Long point){
         verifyOverflowPoint(point);
         Long overflowPoint = point;
-        for (PointSave pointSave : pointSaves) {
+        for (PointActive pointSave : pointActives) {
             overflowPoint = pointSave.deductPoint(overflowPoint);
             if(overflowPoint == 0L){
                 break;

@@ -1,4 +1,4 @@
-package com.github.jojoldu.point.core.domain.event;
+package com.github.jojoldu.point.core.domain.history;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Github : https://github.com/jojoldu
  */
 
-public interface PointEventRepository extends JpaRepository<PointEvent, Long>{
+public interface PointHistoryRepository extends JpaRepository<PointHistory, Long>{
 }

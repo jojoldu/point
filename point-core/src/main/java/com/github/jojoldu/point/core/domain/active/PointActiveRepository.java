@@ -1,4 +1,4 @@
-package com.github.jojoldu.point.core.domain.save;
+package com.github.jojoldu.point.core.domain.active;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Github : https://github.com/jojoldu
  */
 
-public interface PointSaveRepository extends JpaRepository<PointSave, Long>{
+public interface PointActiveRepository extends JpaRepository<PointActive, Long>{
 }

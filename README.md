@@ -40,7 +40,12 @@
   * 환불, 리뷰 삭제, 이벤트 참여 취소 등으로 인해 포인트 처리 롤백
   * 환불시에는 포인트 적립이 롤백
   * 제품 구매시 포인트를 사용했다면 환불시에 적립된 포인트도 롤백
-        
+
+### SQS
+
+* consumer가 동일 메세지를 2번 수신하는것 방지하기 위해 provider에선 uuid를 제공
+  * consumer는 uuid가 이미 들어가있는지 확인후 save과정 진행
+          
 ### 도메인
 
 * 사용자의 **최종 포인트와 포인트 이벤트 이력만으로는 문제해결이 안됨**
@@ -52,8 +57,8 @@
   
 그래서 아래와 같이 2개 도메인으로 설계
 
-* point_save
-  * 포인트 적립
+* point_active
+  * 활성화된 포인트
   * 포인트 적립: insert
   * 포인트 사용/소멸: update
   * save_point, remain_point 컬럼 2개로 나누어 포인트 사용시 remain_point에서 차감
@@ -62,24 +67,28 @@
   * 조회의 경우 **remain_point가 0이 아닌 경우만** 조회
   * 컬럼
       * customer_id
-      * save_type (제품구매, 제품리뷰, 이벤트참여, 보상, 충전)
+      * event_detail_type (제품구매, 제품리뷰, 이벤트참여, 보상, 충전)
       * save_point (제일 처음 등록된 포인트)
       * remain_point (남은 포인트)
       * created_date 
       * updated_date
   * RDS에서만 관리
   
-* point_event
+* point_history
   * 포인트의 모든 이벤트
   * 포인트 적립/사용/소멸: insert
   * 컬럼
       * customer_id
+      * message_id //queue uuid
+      * trade_no
       * event_type (적립/사용/소멸)
+      * event_detail_type 
       * point
       * description
       * created_date
       * updated_date
   * RDS, DynamoDB 양쪽에서 모두 관리
+  * uuid+customer_id가 유니크키
 
 ### 모듈
 
