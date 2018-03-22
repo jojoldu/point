@@ -1,8 +1,5 @@
-package com.github.jojoldu.point.core.domain
+package com.github.jojoldu.point.core.domain.active
 
-import com.github.jojoldu.point.core.domain.active.PointActive
-import com.github.jojoldu.point.core.domain.active.PointActiveCollection
-import com.github.jojoldu.point.core.domain.active.PointActiveRepository
 import com.github.jojoldu.point.core.domain.type.EventDetailType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

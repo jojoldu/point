@@ -26,10 +26,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(
-        uniqueConstraints = @UniqueConstraint(name = "UNI_EVENT_UUID", columnNames = {"messageId", "customerId"}),
+        uniqueConstraints = @UniqueConstraint(name = "UNI_HISTORY_UUID", columnNames = {"messageId", "customerId"}),
         indexes = {
-                @Index(name = "IDX_EVENT_TRADE_NO", columnList = "tradeNo"),
-                @Index(name = "IDX_EVENT_CUSTOMER_ID", columnList = "customerId")
+                @Index(name = "IDX_HISTORY_TRADE_NO", columnList = "tradeNo"),
+                @Index(name = "IDX_HISTORY_CUSTOMER_ID", columnList = "customerId")
         }
 )
 public class PointHistory extends BaseTimeEntity {

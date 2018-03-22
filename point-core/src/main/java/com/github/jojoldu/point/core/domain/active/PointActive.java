@@ -27,7 +27,7 @@ import javax.persistence.*;
 @Entity
 @Table(
         indexes = {
-                @Index(name = "IDX_EVENT_CUSTOMER_ID", columnList = "customerId")
+                @Index(name = "IDX_ACTIVE_CUSTOMER_ID", columnList = "customerId")
         }
 )
 public class PointActive extends BaseTimeEntity {

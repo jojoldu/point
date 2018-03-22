@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface PointHistoryRepository extends JpaRepository<PointHistory, Long>{
+
+    boolean existsByMessageIdAndAndCustomerId(String messageId, Long customerId);
 }
