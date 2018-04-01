@@ -39,7 +39,7 @@ class PointListenerTest extends Specification {
                 .build()
         when:
         queueMessagingTemplate.convertAndSend(sqsQueues.getQueueName("point"), message)
-        Thread.sleep(500L)
+        Thread.sleep(2000L)
 
         then:
         true

@@ -18,18 +18,14 @@ cloud:
 sqs:
   mock:
     enabled: true
-  queues: {
-    "pointDlq": {
-      "name": "point-dlq"
-    },
-    "point": {
-      "name": "point",
-      "defaultVisibilityTimeout": 1,
-      "delay": 0,
-      "receiveMessageWait": 0,
-      "deadLettersQueue": {
-        "name": "point-dlq",
-        "maxReceiveCount": 1
-      }
-    }
-  }
+  queues:
+    -
+      name: 'point-dlq'
+    -
+      name: 'point'
+      defaultVisibilityTimeout: 1
+      delay: 0
+      receiveMessageWait: 0
+      deadLettersQueue:
+        name: "point-dlq"
+        maxReceiveCount: 1

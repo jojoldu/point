@@ -8,7 +8,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.cloud:spring-cloud-starter-aws-messaging')
-	compile 'com.github.jojoldu.spring-boot-aws-mock:spring-boot-starter-mock-sqs:0.0.8'
+	compile 'com.github.jojoldu.spring-boot-aws-mock:spring-boot-starter-mock-sqs:0.1.1'
 }
 
 dependencyManagement {
